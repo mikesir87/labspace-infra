@@ -5,7 +5,7 @@ variable "IMAGE_TAG" {
 
 variable "IMAGE_NAMESPACE" {
   type    = string
-  default = "dockersamples"
+  default = "michaelirwin244"
 }
 
 function tags {

@@ -23,9 +23,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        with:
-          driver: cloud
-          endpoint: ${{ secrets.DOCKER_BUILDER_ENDPOINT }}
 
       - name: Set tag for builds
         run: |
@@ -57,16 +54,16 @@ jobs:
           if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
             sed -i "s/:latest/:dev/g" compose.run.yaml
             sed -i "s/:latest/:dev/g" compose.content-dev.yaml
-            echo "y" | docker compose -f compose.run.yaml publish dockersamples/labspace:dev --with-env -y
-            echo "y" | docker compose -f compose.content-dev.yaml publish dockersamples/labspace-content-dev:dev --with-env -y
+            echo "y" | docker compose -f compose.run.yaml publish michaelirwin244/labspace:dev --with-env -y
+            echo "y" | docker compose -f compose.content-dev.yaml publish michaelirwin244/labspace-content-dev:dev --with-env -y
           else
             TAG="${GITHUB_REF#refs/tags/}"
 
             sed -i "s/:latest/:${TAG}/g" compose.run.yaml
             sed -i "s/:latest/:${TAG}/g" compose.content-dev.yaml
 
-            echo "y" | docker compose -f compose.run.yaml publish dockersamples/labspace:latest --with-env -y
-            echo "y" | docker compose -f compose.run.yaml publish dockersamples/labspace:${TAG} --with-env -y
-            echo "y" | docker compose -f compose.content-dev.yaml publish dockersamples/labspace-content-dev:latest --with-env -y
-            echo "y" | docker compose -f compose.content-dev.yaml publish dockersamples/labspace-content-dev:${TAG} --with-env -y
+            echo "y" | docker compose -f compose.run.yaml publish michaelirwin244/labspace:latest --with-env -y
+            echo "y" | docker compose -f compose.run.yaml publish michaelirwin244/labspace:${TAG} --with-env -y
+            echo "y" | docker compose -f compose.content-dev.yaml publish michaelirwin244/labspace-content-dev:latest --with-env -y
+            echo "y" | docker compose -f compose.content-dev.yaml publish michaelirwin244/labspace-content-dev:${TAG} --with-env -y
           fi
