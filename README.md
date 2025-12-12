@@ -1,5 +1,6 @@
 # Labspace Infra
 
+
 This repository provides the infrastructure and components required to run Labspaces.
 
 ![Screenshot of the project opened in the browser using VS Code server](./screenshot.png)
